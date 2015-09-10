@@ -7,12 +7,16 @@ var T = new Twit({
     access_token_secret: 'OKkoqUNQ9Cz04AkOZaJZ401ChmGO7D3tBUyrGPZ6XmFwq'
 });
 
+var count = 0;
+var ids = [];
+
+
 // init
 // - turn on steam every 10 seconds
 // - collect data inside object
 // - count how many tweets
 function init () {
-
+    trumpStream();
 }
 
 // getCurrentData
@@ -20,9 +24,8 @@ function init () {
 //   - total tweets
 //   - list of tweets
 function getCurrentData() {
-    var count = 0;
 
-    return { count: count };
+    return { count: count, ids: ids };
 }
 // stop
 
@@ -31,12 +34,11 @@ function trumpStream() {
     var magaStream = T.stream('statuses/filter',
         { track: '#makeamericagreatagain' }
     );
-    var magaCount = 0;
 
     magaStream.on('tweet', function (tweet) {
-        magaCount++;
+        count++;
         console.log(tweet.text);
-        console.log("that's " + magaCount + " tweets now.");
+        ids.push(tweet.id);
     });
 }
 
