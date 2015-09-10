@@ -1,5 +1,5 @@
 # #makeamericagreatagain
-By Ashlin Aronin, 9-Sep-2015
+By Ashlin Aronin & Dimitrii Pokrovskii, 9-Sep-2015
 
 Display an iconic hat every time someone tweets Donald Trump's 2016 presidential campaign slogan.
 
@@ -22,4 +22,4 @@ Node, Express, Twit, JavaScript, JQuery, HTML, CSS & Bootstrap.
 
 ## License
 ----------
-MIT License, Copyright (c) 2015 Ashlin Aronin
+MIT License, Copyright (c) 2015 Ashlin Aronin & Dimitrii Pokrovskii
