@@ -40,5 +40,5 @@ function trumpStream() {
     });
 }
 
-module.exports.trumpStream = { init : init,
+module.exports = { init : init,
                      getCurrentData : getCurrentData };
