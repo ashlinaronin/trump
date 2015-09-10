@@ -8,7 +8,7 @@ Display an iconic hat every time someone tweets Donald Trump's 2016 presidential
 Make sure you have [Node.js](http://nodejs.org/) installed.
 
 ```sh
-$ git clone https://github.com/ashlinaronin/trump.git # or clone your own fork
+$ git clone https://github.com/ashlinaronin/trump.git
 $ cd trump
 $ npm install
 $ npm start
