@@ -38,7 +38,8 @@ function trumpStream() {
     magaStream.on('tweet', function (tweet) {
         count++;
         console.log(tweet.text);
-        ids.push(tweet.id);
+        // ids.push(tweet.id);
+        ids.push(tweet.id_str);
     });
 }
 

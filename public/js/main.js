@@ -1,26 +1,17 @@
 $(document).ready(function() {
     var timer = setInterval(function () {
-        // ajax query goes here
         $.getJSON("getTrumpCount", function(data) {
-            // var items = [];
-            console.log(data);
 
             $("#data").empty();
             $("#hats").empty();
 
-
-
-            data.ids.forEach(function(id) {
+            data.ids.forEach(function(id_str) {
                 // $("#data").append("<li>" + id + "</li>");
-                $("#hats").append("<img src='img/redhat.jpg' alt='hat' width='50' height='50'>");
+                $("#hats").append(
+                    "<a href='https://twitter.com/statuses/" + id_str + "'>" +
+                    "<img src='img/redhat.jpg' alt='hat' width='50' height='50'></a>");
             });
-
         });
-
-        console.log("tick");
+    // Check every 1000 ms = 1 s
     }, 1000);
-
-
-
-
 });
