@@ -8,7 +8,8 @@ var T = new Twit({
 });
 
 var count = 0;
-var ids = [];
+var tweets = [];
+var timestamp;
 
 
 // init
@@ -19,15 +20,20 @@ function init () {
     trumpStream();
 }
 
-// getCurrentData
-// - returns data blob
-//   - total tweets
-//   - list of tweets
-function getCurrentData() {
 
-    return { count: count, ids: ids };
+function getCurrentData() {
+    timestamp = new Date();
+
+    return {
+      timestamp: timestamp,
+      count: count,
+      tweets: tweets
+      // tweets is an array of tweet objects e.g. { id: id, avatarUrl: avatarUrl }
+    };
 }
-// stop
+
+
+// Stop
 
 // Print Trump-related tweets to the console
 function trumpStream() {
@@ -37,9 +43,13 @@ function trumpStream() {
 
     magaStream.on('tweet', function (tweet) {
         count++;
-        console.log(tweet.text);
-        // ids.push(tweet.id);
-        ids.push(tweet.id_str);
+
+        // Create a new Tweet object and push it to the tweets array
+        var thisTweet = {
+          id: tweet.id_str,
+          avatarUrl: tweet.user.profile_image_url
+        };
+        tweets.push(thisTweet);
     });
 }
 
