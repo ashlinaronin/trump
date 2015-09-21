@@ -1,65 +1,39 @@
 $(document).ready(function() {
+    var lastTimeStamp;
+    var numTweetsPrinted = 0;
+
     var timer = setInterval(function () {
         $.getJSON("getTrumpCount", function(data) {
-            console.log(data.timestamp);
+            // First, calculate how many new tweets there are
+            var numNewTweets = data.count - numTweetsPrinted;
 
-            // Right now we empty and re-fill each time
-            // need to keep timestamp and do compare to reduce CPU / server load
-            $("#hats").empty();
+            // If there are new tweets, print them.
+            if (numNewTweets !== 0) {
+                for (var i = 0; i < numNewTweets; i++) {
+                    var nextTweetIndex = (numTweetsPrinted + i);
 
+                    $("#hats").append(
+                        "<a href='https://twitter.com/statuses/" + data.tweets[nextTweetIndex].id + "' class='hatlink'>" +
+                        "<img src='img/redhat.jpg' alt='hat' class='redhat'>" +
+                        "<img src='" + data.tweets[nextTweetIndex].avatarUrl + "' alt='avatar' class='avatar'>" +
+                        "</a>"
+                    );
 
+                    // Bind the onHover to the hat when we create it!
+                    $("#hats a").last().hover(function() {
+                        $(this).children("img.redhat").toggle();
+                        $(this).children("img.avatar").toggle();
+                    });
+                }
+                
+                // By this point we should have printed all of the tweets from
+                // the JSON, so we can set the num printed to that amount.
+                numTweetsPrinted = data.count;
 
-            data.tweets.forEach(function(tweet) {
-                // $("#data").append("<li>" + id + "</li>");
-                $("#hats").append(
-                    "<a href='https://twitter.com/statuses/" + tweet.id + "' class='hatlink'>" +
-                    "<img src='img/redhat.jpg' alt='hat' class='redhat'>" +
-                    "<img src='" + tweet.avatarUrl + "' alt='avatar' class='avatar'>" +
-                    "</a>"
-                );
-
-                // Should re-organize object so it stores multiple nested thigns
-                // about each tweet then put user imgs here
-            });
-
-            // data.avatarUrls.forEach(function(avatarUrl) {
-            //   $("#users").append("<img src='" + avatarUrl + "'>");
-            // });
+                // Set last time stamp to the one associated with new data.
+                lastTimeStamp = data.timestamp;
+            }
         });
     // Check every 1000 ms = 1 s
-}, 10000);
-
-    // $("#hats").hover(function(event) { console.log("hover #hats");});
-    // $("#hats").mouseover(function(event) { console.log("mouseover #hats");});
-
-
-    $('#hats').on('hover', 'a', function() {
-        console.log("hover on new #hatlink");
-        console.log("this is " + $(this));
-    });
-
-    $("#hats a").mouseover(function(event) {
-        $(this).addClass("animated bounce");
-        // $(this).children("img.avatar").toggle();
-        console.log("mouseover #hats a");
-    }).mouseout(function(event) {
-        // Mouse out
-        $(this).removeClass("animated bounce");
-    });
-
-    // $("#hats").hover(
-    //     function(event) {
-    //         // Hover on
-    //         $(this).addClass("animated bounce");
-    //         $(this).children("img.avatar").show();
-    //         console.log($(this));
-    //
-    //     },
-    //     function(event) {
-    //         // Hover off
-    //         $(this).removeClass("animated bounce");
-    //     }
-    // );
-
-
+    }, 1000);
 });

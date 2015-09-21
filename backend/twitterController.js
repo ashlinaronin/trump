@@ -9,21 +9,14 @@ var T = new Twit({
 
 var count = 0;
 var tweets = [];
-var timestamp;
+var timestamp = null;
 
-
-// init
-// - turn on steam every 10 seconds
-// - collect data inside object
-// - count how many tweets
+// Public function to start the stream
 function init () {
     trumpStream();
 }
 
-
 function getCurrentData() {
-    timestamp = new Date();
-
     return {
       timestamp: timestamp,
       count: count,
@@ -33,9 +26,9 @@ function getCurrentData() {
 }
 
 
-// Stop
+// Stop function here
 
-// Print Trump-related tweets to the console
+// Internal function to run the stream and update global vars for JSON printing
 function trumpStream() {
     var magaStream = T.stream('statuses/filter',
         { track: '#makeamericagreatagain' }
@@ -50,8 +43,13 @@ function trumpStream() {
           avatarUrl: tweet.user.profile_image_url
         };
         tweets.push(thisTweet);
+
+        // We got a new tweet, update the timestamp
+        timestamp = new Date();
+
     });
 }
 
+// init() and getCurrentData() are public functions
 module.exports = { init : init,
                      getCurrentData : getCurrentData };
