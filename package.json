@@ -1,5 +1,5 @@
 {
-  "name": "#makeamericagreatagain",
+  "name": "makeamericagreatagain",
   "version": "0.1.3",
   "description": "Display Donald Trump's iconic 2016 campaign hat whenever someone tweets with #makeamericagreatagain.",
   "main": "index.js",
