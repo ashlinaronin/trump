@@ -13,7 +13,8 @@ $(document).ready(function() {
                     var nextTweetIndex = (numTweetsPrinted + i);
 
                     $("#hats").append(
-                        "<a href='https://twitter.com/statuses/" + data.tweets[nextTweetIndex].id + "' class='hatlink'>" +
+                        "<a href='https://twitter.com/" + data.tweets[nextTweetIndex].userHandle +
+                        "/status/" + data.tweets[nextTweetIndex].id + "' class='hatlink'>" +
                         "<img src='img/redhat.jpg' alt='hat' class='redhat'>" +
                         "<img src='" + data.tweets[nextTweetIndex].avatarUrl + "' alt='avatar' class='avatar'>" +
                         "</a>"
@@ -25,7 +26,7 @@ $(document).ready(function() {
                         $(this).children("img.avatar").toggle();
                     });
                 }
-                
+
                 // By this point we should have printed all of the tweets from
                 // the JSON, so we can set the num printed to that amount.
                 numTweetsPrinted = data.count;
