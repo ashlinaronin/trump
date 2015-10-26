@@ -39,10 +39,10 @@ function trumpStream() {
     magaStream.on('tweet', function (tweet) {
         count++;
 
-        // Remove the '_normal' at the end of the avatar icon url to get
-        // bigger user avatar images that won't be so pixelated.
-        // '_normal' = 7 chars, so slice off the last 7 chars of the basename
-        // and add back the extension.
+        /* Remove the '_normal' at the end of the avatar icon url to get
+        ** bigger user avatar images that won't be so pixelated.
+        ** '_normal' = 7 chars, so slice off the last 7 chars of the basename
+        ** and add back the extension. */
         var image_url = tweet.user.profile_image_url_https;
         var extension = path.extname(image_url);
         var numToSlice = extension.length + 7;
