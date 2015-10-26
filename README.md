@@ -1,7 +1,7 @@
 # #makeamericagreatagain
-By Ashlin Aronin & Dimitrii Pokrovskii, 9-Sep-2015
+By Ashlin Aronin & Dimitrii Pokrovskii, 26-Oct-2015
 
-Display an iconic hat every time someone tweets Donald Trump's 2016 presidential campaign slogan.
+Display Donald Trump's iconic 2016 campaign hat whenever someone tweets with #makeamericagreatagain.
 
 ## Installation Instructions
 Make sure you have [Node.js](http://nodejs.org/) installed.
