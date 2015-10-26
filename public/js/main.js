@@ -20,7 +20,8 @@ $(document).ready(function() {
                         "</a>"
                     );
 
-                    $("#hats a").last().addClass("animated bounce");
+                    // Add slow fade-in effect to this hat with jQuery
+                    $("#hats a").last().hide().fadeIn("slow");
 
                     // Bind the onHover to the hat when we create it!
                     $("#hats a").last().hover(function() {

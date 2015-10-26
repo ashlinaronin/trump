@@ -1,15 +1,15 @@
-# humanstxt.org/
-# The humans responsible & technology colophon
-
 # TEAM
 
-    <name> -- <role> -- <twitter>
+    Everything: Ashlin Aronin
+    Contact: ashlinaronin [at] gmail.com
+    Location: Portland, OR, USA
 
 # THANKS
 
-    <name>
+    Mentorship, Friendship and Advice: Dimitrii Pokrovskii
+    Contact: http://www.engineering-bear.com/
+
 
 # TECHNOLOGY COLOPHON
 
-    CSS3, HTML5
-    Apache Server Configs, jQuery, Modernizr, Normalize.css
+    CSS3, HTML5, jQuery, Node, Express, Twit API
