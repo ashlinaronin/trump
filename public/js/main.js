@@ -15,10 +15,12 @@ $(document).ready(function() {
                     $("#hats").append(
                         "<a href='https://twitter.com/" + data.tweets[nextTweetIndex].userHandle +
                         "/status/" + data.tweets[nextTweetIndex].id + "' class='hatlink'>" +
-                        "<img src='img/redhat.jpg' alt='hat' class='redhat'>" +
-                        "<img src='" + data.tweets[nextTweetIndex].avatarUrl + "' alt='avatar' class='avatar'>" +
+                        "<img src='img/redhat-sq.jpg' alt='hat' class='redhat'>" +
+                        "<img src='" + data.tweets[nextTweetIndex].biggerAvatarUrl + "' alt='avatar' class='avatar'>" +
                         "</a>"
                     );
+
+                    $("#hats a").last().addClass("animated bounce");
 
                     // Bind the onHover to the hat when we create it!
                     $("#hats a").last().hover(function() {
