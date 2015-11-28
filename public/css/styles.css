@@ -10,6 +10,16 @@
   border-radius: 40%;
 }
 
+.hatwrap {
+
+}
+
+/*.tweet-text {
+  position: relative;
+  top: 25px;
+  top: 25px;
+}*/
+
 /* Even out the padding so that the hats aren't flush against the
 ** top of the screen. */
 .container-fluid {

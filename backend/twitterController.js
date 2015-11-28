@@ -38,6 +38,7 @@ function trumpStream() {
 
     magaStream.on('tweet', function (tweet) {
         count++;
+        console.dir(tweet);
 
         /* Remove the '_normal' at the end of the avatar icon url to get
         ** bigger user avatar images that won't be so pixelated.
@@ -54,6 +55,7 @@ function trumpStream() {
             userHandle: tweet.user.screen_name,
             avatarUrl: tweet.user.profile_image_url_https,
             biggerAvatarUrl: biggerAvatar,
+            text: tweet.text
         };
         tweets.push(thisTweet);
 
