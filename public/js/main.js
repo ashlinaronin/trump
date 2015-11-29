@@ -17,7 +17,7 @@ $(document).ready(function() {
                     console.log(escapeChars(data.tweets[nextTweetIndex].text));
 
                     $("#hats").append(
-                        "<a href='#' class='hat-wrap' data-container='body' data-toggle='popover' data-placement='right' data-trigger='focus'" +
+                        "<a tabindex='0' href='#' class='hat-wrap' data-container='body' data-toggle='popover' data-placement='right' data-trigger='focus' role='button'" +
                             // "data-content='poop'>" +
                             "title='" + data.tweets[nextTweetIndex].userHandle + ":' " +
                             "data-content='" + escapeChars(data.tweets[nextTweetIndex].text) + "'>" +
