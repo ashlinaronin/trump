@@ -17,16 +17,12 @@ $(document).ready(function() {
                     console.log(escapeChars(data.tweets[nextTweetIndex].text));
 
                     $("#hats").append(
-                        "<a tabindex='0' href='#' class='hat-wrap' data-container='body' data-toggle='popover' data-placement='right' data-trigger='focus' role='button'" +
-                            // "data-content='poop'>" +
-                            "title='" + data.tweets[nextTweetIndex].userHandle + ":' " +
-                            "data-content='" + escapeChars(data.tweets[nextTweetIndex].text) + "'>" +
-                            // "title='poop'>" +
+                        "<a role='button'>" +
                           "<img src='img/redhat-sq.jpg' alt='hat' class='redhat'>" +
                           "<img src='" + data.tweets[nextTweetIndex].biggerAvatarUrl + "' alt='avatar' class='avatar'>" +
-                          // "<span class='tweet-text'>" +
-                          //   data.tweets[nextTweetIndex].userHandle + ": " + data.tweets[nextTweetIndex].text +
-                          // "</span>" +
+                          "<span class='tweet-text'>" +
+                            data.tweets[nextTweetIndex].userHandle + ": " + data.tweets[nextTweetIndex].text +
+                          "</span>" +
                         "</a>");
 
 
@@ -35,7 +31,7 @@ $(document).ready(function() {
 
                     // Add slow fade-in effect to this hat with jQuery
                     $("#hats a").last().hide().fadeIn("slow");
-                    $("#hats a").last().popover();
+                    // $("#hats a").last().popover();
 
                     // Bind the onHover to the hat when we create it!
                     $("#hats a").last().hover(function() {

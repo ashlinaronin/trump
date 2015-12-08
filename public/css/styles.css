@@ -14,11 +14,17 @@
 
 }
 
-/*.tweet-text {
-  position: relative;
+.tweet-text {
+  /*position: absolute;*/
   top: 25px;
-  top: 25px;
-}*/
+  left: 200px;
+  display: block;
+}
+
+.tweet-text:after {
+  /*content: url('img/speech-bubble.svg');*/
+  /* doesn't work */
+}
 
 /* Even out the padding so that the hats aren't flush against the
 ** top of the screen. */
