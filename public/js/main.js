@@ -15,6 +15,7 @@ $(document).ready(function() {
                     $("#hats").append(
                         "<a href='https://twitter.com/" + data.tweets[nextTweetIndex].userHandle +
                         "/status/" + data.tweets[nextTweetIndex].id + "' class='hatlink' target='_blank'>" +
+                        // "#stream-item-tweet-" + data.tweets[nextTweetIndex].id + "' class='hatlink'>" +
                         "<img src='img/redhat-sq.jpg' alt='hat' class='redhat'>" +
                         "<img src='" + data.tweets[nextTweetIndex].biggerAvatarUrl + "' alt='avatar' class='avatar'>" +
                         "</a>"
