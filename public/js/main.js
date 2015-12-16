@@ -1,9 +1,11 @@
 $(document).ready(function() {
+    $.mobile.loading().hide();
+
     var lastTimeStamp;
     var numTweetsPrinted = 0;
 
     var showing = null;
-    var speed = 200;
+    var speed = 300;
 
     var timer = setInterval(function () {
         $.getJSON("getTrumpCount", function(data) {
@@ -17,29 +19,28 @@ $(document).ready(function() {
 
                     $("#hats").append(
                         "<span id='" + data.tweets[nextTweetIndex].id + "'>" +
-                        // "<a href='https://twitter.com/" + data.tweets[nextTweetIndex].userHandle +
-                        // "/status/" + data.tweets[nextTweetIndex].id + "' class='hatlink' target='_blank'>" +
-                        // "#stream-item-tweet-" + data.tweets[nextTweetIndex].id + "' class='hatlink'>" +
-                        "<img src='img/redhat-sq.jpg' alt='hat' class='redhat'>" +
-                        "<img src='" + data.tweets[nextTweetIndex].biggerAvatarUrl + "' alt='avatar' class='avatar'>"
-                        // "</a>"
+                          "<img src='img/redhat-sq.jpg' alt='hat' class='redhat'>" +
+                          "<img src='" + data.tweets[nextTweetIndex].biggerAvatarUrl + "' alt='avatar' class='avatar'>"
                         + "</span>"
                     );
 
                     // Add slow fade-in effect to this hat with jQuery
                     $("#hats span").last().hide().fadeIn(speed);
 
-                    // Bind the onHover to the hat when we create it!
-                    $("#hats span").last().hover(function() {
-                        $(this).children("img.redhat").toggle();
-                        $(this).children("img.avatar").toggle();
+                    // Bind the onHover to the hat when we create it.
+                    // Now supporting touch and click events simultaneously.
+                    // This solution from http://stackoverflow.com/questions/3038898/ipad-iphone-hover-problem-causes-the-user-to-double-click-a-link
+                    $("#hats span").last().on('touchstart mouseenter', function() {
+                        $(this).children("img.redhat").hide();
+                        $(this).children("img.avatar").show();
+                    })
+                    .on('mouseleave touchmove click', function() {
+                        $(this).children("img.redhat").show();
+                        $(this).children("img.avatar").hide();
                     });
+                }
 
-
-
-                } // very slow, lots of dom manipulation
-
-                // set up click handlers for all hats
+                // Set up click handlers for all hats
                 $("#hats span").click(function() {
                   var index = $('#hats span').index($(this));
 
@@ -52,6 +53,7 @@ $(document).ready(function() {
                     $('#overlay-text').hide().fadeIn(speed, function() {
                       showing = $('#hats span')[index]; // on callback
                     });
+                    $('body').addClass('clickable'); // support touch events
                   }
                 });
 
@@ -66,7 +68,6 @@ $(document).ready(function() {
                   }
                 }
 
-
                 // Show previous tweet in overlay, if it exists
                 var showPrevious = function() {
                   var newIndex = $('#hats span').index($(showing)) - 1;
@@ -78,22 +79,14 @@ $(document).ready(function() {
                   }
                 }
 
+                // Left and right arrow keys or swiping to show next and previous tweets
                 $(document).keyup(function(event) {
-                  // event.preventDefault();
-                  // try to deal with dual arrow key function
-                  // for now don't do anything on up / down
                   switch(event.which) {
                     case 37: // left
                       if (showing) { showPrevious() }
                       break;
-                    case 38: // up
-                      // if (showing) { showPrevious() }
-                      break;
                     case 39: // right
                       if (showing) { showNext() }
-                      break;
-                    case 40: // down
-                      // if (showing) { showNext() }
                       break;
                     default: // other key hides overlay
                       if (showing) { hideOverlay() }
@@ -101,6 +94,13 @@ $(document).ready(function() {
                   }
                 });
 
+                $(window).on('swipeleft', function(event) {
+                  if (showing) {showNext()};
+                });
+
+                $(window).on('swiperight', function(event) {
+                  if (showing) {showPrevious()};
+                });
 
                 // By this point we should have printed all of the tweets from
                 // the JSON, so we can set the num printed to that amount.
@@ -120,14 +120,12 @@ $(document).ready(function() {
         $('#overlay-text').text(null);
         showing = null;
       });
+      $('body').removeClass('clickable');
     }
 
     // click anywhere to hide the overlay
     $('body').click(function() {
       if (showing) { hideOverlay() }
     });
-
-
-
 
 });
