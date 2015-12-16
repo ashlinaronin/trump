@@ -39,20 +39,27 @@ $(document).ready(function() {
 
                 } // very slow, lots of dom manipulation
 
+                // $("#hats span").hover(function() {
+                //   $(this).children("img.redhat").toggle();
+                //   $(this).children("img.avatar").toggle();
+                // });
+
 
                 // set up click handlers for all hats
                 $("#hats span").click(function() {
                   var index = $('#hats span').index($(this));
 
                   if (!showing) {
+                    $('#overlay').css('background-image', 'url(' + data.tweets[index].biggerAvatarUrl + ')');
                     $('#overlay').hide().fadeIn(speed);
-                    $('#bubble-text').html(
-                      "<a href='https://twitter.com/" + data.tweets[index].userHandle +
-                      "/status/" + data.tweets[nextTweetIndex].id + "' target='_blank'>" +
-                      '@' + data.tweets[index].userHandle + ': ' + data.tweets[index].text +
-                      "</a>"
+
+                    $('#overlay-text').html(
+                      // "<a href='https://twitter.com/" + data.tweets[index].userHandle +
+                      // "/status/" + data.tweets[nextTweetIndex].id + "' target='_blank'>" +
+                      '@' + data.tweets[index].userHandle + ': ' + data.tweets[index].text
+                      // "</a>"
                     );
-                    $('#bubble-text').hide().fadeIn(speed, function() {
+                    $('#overlay-text').hide().fadeIn(speed, function() {
                       showing = $(this); // on callback
                     });
                   }
@@ -76,8 +83,8 @@ $(document).ready(function() {
         console.log('body sez somebody is showing');
 
         $('#overlay').fadeOut(speed);
-        $('#bubble-text').fadeOut(speed, function() {
-          $('#bubble-text').text(null);
+        $('#overlay-text').fadeOut(speed, function() {
+          $('#overlay-text').text(null);
           showing = null;
         });
       }

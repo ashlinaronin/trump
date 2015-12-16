@@ -17,8 +17,11 @@ body {
     padding: 20px;
 }
 
+.container {
+  text-align: center;
+}
+
 #overlay {
-  /*content: url('../img/speech-bubble.svg');*/
   background-color: black;
   width: 100%;
   height: 100%;
@@ -28,31 +31,35 @@ body {
   z-index: 100;
   opacity: 0.8;
   display: none;
-  /*background-color: white;*/
-  /*opacity: 0.85;*/
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
 
-#bubble-text {
-  /*background-color: white;*/
-  /*font-family: sans-serif;*/
+#overlay-text {
   font-family: 'PT Serif', serif;
-  /*font-family: 'Cantata One', serif;*/
-  /*font-family: 'Volkhov', serif;*/
-  color: white;
+  color: black;
   text-align: center;
   padding: 30px;
   font-size: 24px;
   position: fixed;
   max-width: 70%;
-  top: 285px;
-  left: 100px;
-  /*width: 100px;
-  height: 100px;*/
+  top: 20%;
+  padding: 100px;
   z-index: 150;
   display: none;
+  text-shadow:
+    1px 0px 1px #ccc, 0px 1px 1px #eee,
+    2px 1px 1px #ccc, 1px 2px 1px #eee;
+    /*3px 2px 1px #ccc, 2px 3px 1px #eee,
+    4px 3px 1px #ccc, 3px 4px 1px #eee,
+    5px 4px 1px #ccc, 4px 5px 1px #eee,
+    6px 5px 1px #ccc, 5px 6px 1px #eee,
+    7px 6px 1px #ccc;*/
+
 }
 
-#bubble-text a {
+#overlay-text a {
   text-decoration: none;
   color: white;
 }

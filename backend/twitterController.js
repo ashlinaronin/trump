@@ -47,10 +47,12 @@ function trumpStream() {
         var extension = path.extname(image_url);
         var numToSlice = extension.length + 7;
         var biggerAvatar = image_url.slice(0, -numToSlice) + extension;
+        // console.dir(tweet);
 
         // Create a new Tweet object and push it to the tweets array
         var thisTweet = {
-            id: tweet.retweeted_status? tweet.retweeted_status.id_str : tweet.id_str,
+            id: tweet.id_str,
+            // id: tweet.retweeted_status? tweet.retweeted_status.id_str : tweet.id_str,
             userHandle: tweet.user.screen_name,
             avatarUrl: tweet.user.profile_image_url_https,
             biggerAvatarUrl: biggerAvatar,
