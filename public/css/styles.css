@@ -1,3 +1,15 @@
+body {
+  padding: 20px;
+}
+
+.container {
+  text-align: center;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
 .redhat {
   width: 100px;
   height: 100px;
@@ -12,18 +24,6 @@
   border-radius: 40%;
   cursor: pointer;
   z-index: 10;
-}
-
-body {
-    padding: 20px;
-}
-
-.container {
-  text-align: center;
-}
-
-.clickable {
-  cursor: pointer;
 }
 
 #overlay {
@@ -66,9 +66,9 @@ body {
   z-index: 200;
   display: none;
   text-shadow: 4px 4px 7px rgba(0, 0, 0, 1);
-
 }
 
+/* Nicer display of overlay for smaller screens */
 @media screen and (max-width: 640px) {
   #overlay-text {
     font-size: 20px;
@@ -76,11 +76,6 @@ body {
     max-width: 80%;
     padding: 30px;
   }
-}
-
-#overlay-text a {
-  text-decoration: none;
-  color: white;
 }
 
 /* hide focus that jquery mobile ui gives to some clickable page components */
