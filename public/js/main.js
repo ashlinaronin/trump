@@ -13,21 +13,29 @@ $(document).ready(function() {
                     var nextTweetIndex = (numTweetsPrinted + i);
 
                     $("#hats").append(
-                        "<a href='https://twitter.com/" + data.tweets[nextTweetIndex].userHandle +
-                        "/status/" + data.tweets[nextTweetIndex].id + "' class='hatlink' target='_blank'>" +
+                        "<span id='" + data.tweets[nextTweetIndex].id + "'>" +
+                        // "<a href='https://twitter.com/" + data.tweets[nextTweetIndex].userHandle +
+                        // "/status/" + data.tweets[nextTweetIndex].id + "' class='hatlink' target='_blank'>" +
                         // "#stream-item-tweet-" + data.tweets[nextTweetIndex].id + "' class='hatlink'>" +
                         "<img src='img/redhat-sq.jpg' alt='hat' class='redhat'>" +
-                        "<img src='" + data.tweets[nextTweetIndex].biggerAvatarUrl + "' alt='avatar' class='avatar'>" +
-                        "</a>"
+                        "<img src='" + data.tweets[nextTweetIndex].biggerAvatarUrl + "' alt='avatar' class='avatar'>"
+                        // "</a>"
+                        + "</span>"
                     );
 
                     // Add slow fade-in effect to this hat with jQuery
-                    $("#hats a").last().hide().fadeIn("slow");
+                    $("#hats span").last().hide().fadeIn("slow");
 
                     // Bind the onHover to the hat when we create it!
-                    $("#hats a").last().hover(function() {
+                    $("#hats span").last().hover(function() {
                         $(this).children("img.redhat").toggle();
                         $(this).children("img.avatar").toggle();
+                    });
+
+                    $("#hats span").last().click(function() {
+                      console.log('you clicked hat');
+                      console.log('this hat id is ' + $(this).attr('id'));
+                      $('.container-fluid').toggleClass('overlay');
                     });
                 }
 
