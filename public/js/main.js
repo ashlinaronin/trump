@@ -16,7 +16,7 @@ $(document).ready(function() {
                     var nextTweetIndex = (numTweetsPrinted + i);
 
                     $("#hats").append(
-                        "<span id='" + data.tweets[nextTweetIndex].id + "' data-tweet-text='" + data.tweets[nextTweetIndex].text + "'>" +
+                        "<span id='" + data.tweets[nextTweetIndex].id + "'>" +
                         // "<a href='https://twitter.com/" + data.tweets[nextTweetIndex].userHandle +
                         // "/status/" + data.tweets[nextTweetIndex].id + "' class='hatlink' target='_blank'>" +
                         // "#stream-item-tweet-" + data.tweets[nextTweetIndex].id + "' class='hatlink'>" +
@@ -27,7 +27,7 @@ $(document).ready(function() {
                     );
 
                     // Add slow fade-in effect to this hat with jQuery
-                    $("#hats span").last().hide().fadeIn("slow");
+                    $("#hats span").last().hide().fadeIn(speed);
 
                     // Bind the onHover to the hat when we create it!
                     $("#hats span").last().hover(function() {
@@ -36,7 +36,8 @@ $(document).ready(function() {
                     });
 
                     $("#hats span").last().click(function() {
-                      console.dir(showing);
+                      var index = $('#hats span').index($(this));
+                      // console.dir(showing);
                       if (showing == $(this)) {
                         // this one is already showing, hide it
                         // showing = null;
@@ -53,8 +54,12 @@ $(document).ready(function() {
                         // add overlay and change text
 
                         $('#overlay').hide().fadeIn(speed);
-                        $('#bubble-text').text($(this).attr('data-tweet-text'));
-                        console.log($(this).attr('data-tweet-text'));
+                        // console.log('text: ' + data.tweets[index].text);
+                        $('#bubble-text').text(data.tweets[index].text);
+                        // console.log($(this).attr('data-tweet-text'));
+                        // console.log('index: ' + $('#hats span').index($(this)));
+
+                        // console.log(data.tweets[nextTweetIndex].id);
                         $('#bubble-text').hide().fadeIn(speed, function() {
                           showing = $(this); // on callback
                         });
