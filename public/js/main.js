@@ -3,7 +3,7 @@ $(document).ready(function() {
     var numTweetsPrinted = 0;
 
     var showing = null;
-    var speed = 300;
+    var speed = 200;
 
     var timer = setInterval(function () {
         $.getJSON("getTrumpCount", function(data) {
@@ -35,41 +35,28 @@ $(document).ready(function() {
                         $(this).children("img.avatar").toggle();
                     });
 
-                    $("#hats span").last().click(function() {
-                      var index = $('#hats span').index($(this));
-                      // console.dir(showing);
-                      if (showing == $(this)) {
-                        // this one is already showing, hide it
-                        // showing = null;
-                        // $('#overlay').fadeOut('slow');
-                        // $('#bubble-text').fadeOut('slow');
-                      } else if (showing && showing !== $(this)) {
-                        // somebody else is showing now
-                        // just change showing and text
-                        // $('#')
-                        // showing = $(this);
-                        // $('#bubble-text').text($(this).attr('id'));
-                      } else {
-                        // nobody is showing yet, set showing to this,
-                        // add overlay and change text
 
-                        $('#overlay').hide().fadeIn(speed);
-                        // console.log('text: ' + data.tweets[index].text);
-                        $('#bubble-text').text(data.tweets[index].text);
-                        // console.log($(this).attr('data-tweet-text'));
-                        // console.log('index: ' + $('#hats span').index($(this)));
 
-                        // console.log(data.tweets[nextTweetIndex].id);
-                        $('#bubble-text').hide().fadeIn(speed, function() {
-                          showing = $(this); // on callback
-                        });
-
-                        // setTimeout(function() {
-                        //   showing = $(this);
-                        // }, 100);
-                      }
-                    });
                 } // very slow, lots of dom manipulation
+
+
+                // set up click handlers for all hats
+                $("#hats span").click(function() {
+                  var index = $('#hats span').index($(this));
+
+                  if (!showing) {
+                    $('#overlay').hide().fadeIn(speed);
+                    $('#bubble-text').html(
+                      "<a href='https://twitter.com/" + data.tweets[index].userHandle +
+                      "/status/" + data.tweets[nextTweetIndex].id + "' target='_blank'>" +
+                      '@' + data.tweets[index].userHandle + ': ' + data.tweets[index].text +
+                      "</a>"
+                    );
+                    $('#bubble-text').hide().fadeIn(speed, function() {
+                      showing = $(this); // on callback
+                    });
+                  }
+                });
 
 
                 // By this point we should have printed all of the tweets from
