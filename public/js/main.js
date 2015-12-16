@@ -2,6 +2,8 @@ $(document).ready(function() {
     var lastTimeStamp;
     var numTweetsPrinted = 0;
 
+    var showing = null;
+
     var timer = setInterval(function () {
         $.getJSON("getTrumpCount", function(data) {
             // First, calculate how many new tweets there are
@@ -33,9 +35,32 @@ $(document).ready(function() {
                     });
 
                     $("#hats span").last().click(function() {
-                      console.log('you clicked hat');
-                      console.log('this hat id is ' + $(this).attr('id'));
-                      $('.container-fluid').toggleClass('overlay');
+                      console.dir(showing);
+                      if (showing == $(this)) {
+                        // this one is already showing, hide it
+                        // showing = null;
+                        // $('#overlay').fadeOut('slow');
+                        // $('#bubble-text').fadeOut('slow');
+                      } else if (showing && showing !== $(this)) {
+                        // somebody else is showing now
+                        // just change showing and text
+                        // $('#')
+                        // showing = $(this);
+                        // $('#bubble-text').text($(this).attr('id'));
+                      } else {
+                        // nobody is showing yet, set showing to this,
+                        // add overlay and change text
+
+                        $('#overlay').hide().fadeIn('slow');
+                        $('#bubble-text').text($(this).attr('id'));
+                        $('#bubble-text').hide().fadeIn('slow', function() {
+                          showing = $(this); // on callback
+                        });
+
+                        // setTimeout(function() {
+                        //   showing = $(this);
+                        // }, 100);
+                      }
                     });
                 }
 
@@ -49,4 +74,30 @@ $(document).ready(function() {
         });
     // Check every 1000 ms = 1 s
     }, 1000);
+
+    var showOverlay = function(text) {
+      console.log('in show overlay');
+      $('#overlay').hide().fadeIn('slow');
+      $('#bubble-text').text(text);
+      $('#bubble-text').hide().fadeIn('slow');
+    }
+
+    var hideOverlay = function() {
+
+      $('#bubble-text').fadeOut('slow');
+      $('#overlay').fadeOut('slow');
+    }
+
+
+    $('body').click(function() {
+      if (showing) {
+        console.log('body sez somebody is showing');
+
+        $('#overlay').fadeOut('slow');
+        $('#bubble-text').fadeOut('slow', function() {
+          $('#bubble-text').text(null);
+          showing = null;
+        });
+      }
+    });
 });
