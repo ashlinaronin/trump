@@ -59,6 +59,7 @@ $(document).ready(function() {
                       '@' + data.tweets[index].userHandle + ': ' + data.tweets[index].text
                       // "</a>"
                     );
+                    $('#overlay-text-wrap').hide().fadeIn(speed);
                     $('#overlay-text').hide().fadeIn(speed, function() {
                       showing = $(this); // on callback
                     });
@@ -83,6 +84,7 @@ $(document).ready(function() {
         console.log('body sez somebody is showing');
 
         $('#overlay').fadeOut(speed);
+        $('#overlay-text-wrap').fadeOut(speed);
         $('#overlay-text').fadeOut(speed, function() {
           $('#overlay-text').text(null);
           showing = null;
