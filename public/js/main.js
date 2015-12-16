@@ -39,12 +39,6 @@ $(document).ready(function() {
 
                 } // very slow, lots of dom manipulation
 
-                // $("#hats span").hover(function() {
-                //   $(this).children("img.redhat").toggle();
-                //   $(this).children("img.avatar").toggle();
-                // });
-
-
                 // set up click handlers for all hats
                 $("#hats span").click(function() {
                   var index = $('#hats span').index($(this));
@@ -130,15 +124,7 @@ $(document).ready(function() {
 
     // click anywhere to hide the overlay
     $('body').click(function() {
-      if (showing) {
-        hideOverlay();
-        // $('#overlay').fadeOut(speed);
-        // $('#overlay-text-wrap').fadeOut(speed);
-        // $('#overlay-text').fadeOut(speed, function() {
-        //   $('#overlay-text').text(null);
-        //   showing = null;
-        // });
-      }
+      if (showing) { hideOverlay() }
     });
 
 
