@@ -14,7 +14,6 @@
   z-index: 10;
 }
 
-
 body {
     padding: 20px;
 }
@@ -43,46 +42,25 @@ body {
   height: 100%;
   position: fixed;
   top: 0;
-  /*top: 20%;*/
   left: 0;
   z-index: 150;
   text-align: center;
-  /*background-color: black;*/
-
   background: rgba(0,0,0,0.5);
   display: none;
-
 }
 
 #overlay-text {
   font-family: 'PT Serif', serif;
-  /*background: rgba(0,0,0,0.6);*/
-  /*width: 100%;*/
-  /*border-radius: 50%;*/
   top: 20%;
   color: white;
-  /*text-align: center;*/
   margin: 0 auto;
-  /*padding: 30px;*/
   font-size: 24px;
-  /*position: fixed;*/
   position: relative;
   max-width: 70%;
-  /*top: 20%;*/
   padding: 60px;
-  /*padding: 80px 60px 60px 60px;*/
   z-index: 200;
   display: none;
   text-shadow: 4px 4px 7px rgba(0, 0, 0, 1);
-  /*text-shadow:
-    1px 0px 1px #ccc, 0px 1px 1px #eee,
-    2px 1px 1px #ccc, 1px 2px 1px #eee;*/
-    /*3px 2px 1px #ccc, 2px 3px 1px #eee,
-    4px 3px 1px #ccc, 3px 4px 1px #eee,
-    5px 4px 1px #ccc, 4px 5px 1px #eee,
-    6px 5px 1px #ccc, 5px 6px 1px #eee,
-    7px 6px 1px #ccc;*/
-
 }
 
 #overlay-text a {

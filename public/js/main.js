@@ -53,16 +53,57 @@ $(document).ready(function() {
                     $('#overlay').css('background-image', 'url(' + data.tweets[index].biggerAvatarUrl + ')');
                     $('#overlay').hide().fadeIn(speed);
 
-                    $('#overlay-text').html(
-                      // "<a href='https://twitter.com/" + data.tweets[index].userHandle +
-                      // "/status/" + data.tweets[nextTweetIndex].id + "' target='_blank'>" +
-                      '@' + data.tweets[index].userHandle + ': ' + data.tweets[index].text
-                      // "</a>"
-                    );
+                    $('#overlay-text').text('@' + data.tweets[index].userHandle + ': ' + data.tweets[index].text);
                     $('#overlay-text-wrap').hide().fadeIn(speed);
                     $('#overlay-text').hide().fadeIn(speed, function() {
-                      showing = $(this); // on callback
+                      showing = $('#hats span')[index]; // on callback
                     });
+                  }
+                });
+
+                // Show next tweet in overlay, if it exists
+                var showNext = function() {
+                  var newIndex = $('#hats span').index($(showing)) + 1;
+
+                  if (data.tweets[newIndex]) {
+                    $('#overlay').css('background-image', 'url(' + data.tweets[newIndex].biggerAvatarUrl + ')');
+                    $('#overlay-text').text('@' + data.tweets[newIndex].userHandle + ': ' + data.tweets[newIndex].text);
+                    showing = $(showing).next();
+                  }
+                }
+
+
+                // Show previous tweet in overlay, if it exists
+                var showPrevious = function() {
+                  var newIndex = $('#hats span').index($(showing)) - 1;
+
+                  if (data.tweets[newIndex]) {
+                    $('#overlay').css('background-image', 'url(' + data.tweets[newIndex].biggerAvatarUrl + ')');
+                    $('#overlay-text').text('@' + data.tweets[newIndex].userHandle + ': ' + data.tweets[newIndex].text);
+                    showing = $(showing).prev();
+                  }
+                }
+
+                $(document).keyup(function(event) {
+                  // event.preventDefault();
+                  // try to deal with dual arrow key function
+                  // for now don't do anything on up / down
+                  switch(event.which) {
+                    case 37: // left
+                      if (showing) { showPrevious() }
+                      break;
+                    case 38: // up
+                      // if (showing) { showPrevious() }
+                      break;
+                    case 39: // right
+                      if (showing) { showNext() }
+                      break;
+                    case 40: // down
+                      // if (showing) { showNext() }
+                      break;
+                    default: // other key hides overlay
+                      if (showing) { hideOverlay() }
+                      break;
                   }
                 });
 
@@ -78,17 +119,29 @@ $(document).ready(function() {
     // Check every 1000 ms = 1 s
     }, 1000);
 
+    var hideOverlay = function() {
+      $('#overlay').fadeOut(speed);
+      $('#overlay-text-wrap').fadeOut(speed);
+      $('#overlay-text').fadeOut(speed, function() {
+        $('#overlay-text').text(null);
+        showing = null;
+      });
+    }
 
+    // click anywhere to hide the overlay
     $('body').click(function() {
       if (showing) {
-        console.log('body sez somebody is showing');
-
-        $('#overlay').fadeOut(speed);
-        $('#overlay-text-wrap').fadeOut(speed);
-        $('#overlay-text').fadeOut(speed, function() {
-          $('#overlay-text').text(null);
-          showing = null;
-        });
+        hideOverlay();
+        // $('#overlay').fadeOut(speed);
+        // $('#overlay-text-wrap').fadeOut(speed);
+        // $('#overlay-text').fadeOut(speed, function() {
+        //   $('#overlay-text').text(null);
+        //   showing = null;
+        // });
       }
     });
+
+
+
+
 });
