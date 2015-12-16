@@ -1,6 +1,7 @@
 .redhat {
   width: 100px;
   height: 100px;
+  cursor: pointer;
 }
 
 .avatar {
@@ -8,28 +9,24 @@
   width: 100px;
   height: 100px;
   border-radius: 40%;
+  cursor: pointer;
 }
 
-/* Even out the padding so that the hats aren't flush against the
-** top of the screen. */
-.container-fluid {
-    padding-top: 20px;
-}
 
-.container-fluid {
-  background-color: white;
-  /*opacity: 0.6;*/
+body {
+    padding: 20px;
 }
 
 #overlay {
-  content: url('../img/speech-bubble.svg');
-  width: 80%;
-  height: 80%;
-  position: absolute;
-  top: 50px;
-  left: 50px;
+  /*content: url('../img/speech-bubble.svg');*/
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
   z-index: 100;
-  opacity: 1.0;
+  opacity: 0.8;
   display: none;
   /*background-color: white;*/
   /*opacity: 0.85;*/
@@ -37,9 +34,16 @@
 
 #bubble-text {
   /*background-color: white;*/
+  /*font-family: sans-serif;*/
+  font-family: 'PT Serif', serif;
+  /*font-family: 'Cantata One', serif;*/
+  /*font-family: 'Volkhov', serif;*/
+  color: white;
+  text-align: center;
   padding: 30px;
   font-size: 24px;
-  position: absolute;
+  position: fixed;
+  max-width: 70%;
   top: 285px;
   left: 100px;
   /*width: 100px;

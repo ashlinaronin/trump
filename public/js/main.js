@@ -3,6 +3,7 @@ $(document).ready(function() {
     var numTweetsPrinted = 0;
 
     var showing = null;
+    var speed = 300;
 
     var timer = setInterval(function () {
         $.getJSON("getTrumpCount", function(data) {
@@ -15,7 +16,7 @@ $(document).ready(function() {
                     var nextTweetIndex = (numTweetsPrinted + i);
 
                     $("#hats").append(
-                        "<span id='" + data.tweets[nextTweetIndex].id + "'>" +
+                        "<span id='" + data.tweets[nextTweetIndex].id + "' data-tweet-text='" + data.tweets[nextTweetIndex].text + "'>" +
                         // "<a href='https://twitter.com/" + data.tweets[nextTweetIndex].userHandle +
                         // "/status/" + data.tweets[nextTweetIndex].id + "' class='hatlink' target='_blank'>" +
                         // "#stream-item-tweet-" + data.tweets[nextTweetIndex].id + "' class='hatlink'>" +
@@ -51,9 +52,10 @@ $(document).ready(function() {
                         // nobody is showing yet, set showing to this,
                         // add overlay and change text
 
-                        $('#overlay').hide().fadeIn('slow');
-                        $('#bubble-text').text($(this).attr('id'));
-                        $('#bubble-text').hide().fadeIn('slow', function() {
+                        $('#overlay').hide().fadeIn(speed);
+                        $('#bubble-text').text($(this).attr('data-tweet-text'));
+                        console.log($(this).attr('data-tweet-text'));
+                        $('#bubble-text').hide().fadeIn(speed, function() {
                           showing = $(this); // on callback
                         });
 
@@ -62,7 +64,8 @@ $(document).ready(function() {
                         // }, 100);
                       }
                     });
-                }
+                } // very slow, lots of dom manipulation
+
 
                 // By this point we should have printed all of the tweets from
                 // the JSON, so we can set the num printed to that amount.
@@ -75,26 +78,13 @@ $(document).ready(function() {
     // Check every 1000 ms = 1 s
     }, 1000);
 
-    var showOverlay = function(text) {
-      console.log('in show overlay');
-      $('#overlay').hide().fadeIn('slow');
-      $('#bubble-text').text(text);
-      $('#bubble-text').hide().fadeIn('slow');
-    }
-
-    var hideOverlay = function() {
-
-      $('#bubble-text').fadeOut('slow');
-      $('#overlay').fadeOut('slow');
-    }
-
 
     $('body').click(function() {
       if (showing) {
         console.log('body sez somebody is showing');
 
-        $('#overlay').fadeOut('slow');
-        $('#bubble-text').fadeOut('slow', function() {
+        $('#overlay').fadeOut(speed);
+        $('#bubble-text').fadeOut(speed, function() {
           $('#bubble-text').text(null);
           showing = null;
         });

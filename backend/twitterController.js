@@ -54,6 +54,7 @@ function trumpStream() {
             userHandle: tweet.user.screen_name,
             avatarUrl: tweet.user.profile_image_url_https,
             biggerAvatarUrl: biggerAvatar,
+            text: tweet.text
         };
         tweets.push(thisTweet);
 
