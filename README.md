@@ -3,6 +3,8 @@ By Ashlin Aronin & Dimitrii Pokrovskii, 26-Oct-2015
 
 Display Donald Trump's iconic 2016 campaign hat whenever someone tweets with #makeamericagreatagain.
 
+Thanks to TukTuk Design at the Noun Project for the icons.
+
 ## Installation Instructions
 Make sure you have [Node.js](http://nodejs.org/) installed.
 

@@ -1,6 +1,9 @@
 $(document).ready(function() {
     $.mobile.loading().hide();
 
+
+
+
     var lastTimeStamp;
     var numTweetsPrinted = 0;
 
@@ -49,6 +52,7 @@ $(document).ready(function() {
                     $('#overlay').hide().fadeIn(speed);
 
                     $('#overlay-text').text('@' + data.tweets[index].userHandle + ': ' + data.tweets[index].text);
+                    $('.arrow').hide().fadeIn(speed);
                     $('#overlay-text-wrap').hide().fadeIn(speed);
                     $('#overlay-text').hide().fadeIn(speed, function() {
                       showing = $('#hats span')[index]; // on callback
@@ -78,6 +82,23 @@ $(document).ready(function() {
                     showing = $(showing).prev();
                   }
                 }
+
+                // Hover effect for arrows
+                $('.arrow').mouseenter(function() {
+                  $(this).find('circle')[0].style.fill = '#b8222f';
+                })
+                .mouseleave(function() {
+                  $(this).find('circle')[0].style.fill = 'none';
+                });
+
+                $('#arrow-left').click(function() {
+                  if (showing) { showPrevious() };
+                });
+                $('#arrow-right').click(function() {
+                  if (showing) { showNext() };
+                });
+
+
 
                 // Left and right arrow keys or swiping to show next and previous tweets
                 $(document).keyup(function(event) {
@@ -116,6 +137,7 @@ $(document).ready(function() {
     var hideOverlay = function() {
       $('#overlay').fadeOut(speed);
       $('#overlay-text-wrap').fadeOut(speed);
+      $('.arrow').fadeOut(speed);
       $('#overlay-text').fadeOut(speed, function() {
         $('#overlay-text').text(null);
         showing = null;
@@ -124,7 +146,7 @@ $(document).ready(function() {
     }
 
     // click anywhere to hide the overlay
-    $('body').click(function() {
+    $('.overlay').click(function() {
       if (showing) { hideOverlay() }
     });
 
