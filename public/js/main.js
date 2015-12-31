@@ -1,3 +1,5 @@
+//TODO: Don't rely on lexical scope, encapsulate more cleanly.
+
 $(document).ready(function() {
     $.mobile.loading().hide();
 
@@ -48,11 +50,15 @@ $(document).ready(function() {
                     $('#overlay').css('background-image', 'url(' + data.tweets[index].biggerAvatarUrl + ')');
                     $('#overlay').hide().fadeIn(speed);
 
+                    // Show arrows for larger screens
+                    if ($(window).innerWidth() > 640) {
+                      $('.arrow').hide().fadeIn(speed);
+                    }
+
                     $('#overlay-text').text('@' + data.tweets[index].userHandle + ': ' + data.tweets[index].text);
-                    $('.arrow').hide().fadeIn(speed);
                     $('#overlay-text-wrap').hide().fadeIn(speed);
                     $('#overlay-text').hide().fadeIn(speed, function() {
-                      showing = $('#hats span')[index]; // on callback
+                      showing = $('#hats span')[index]; // set currently showing only once it is actually shown
                     });
                     $('body').addClass('clickable'); // support touch events
                   }
@@ -82,14 +88,10 @@ $(document).ready(function() {
 
                 // Hover effect for arrows
                 $('.arrow').mouseenter(function() {
-                  // $(this).find('circle')[0].style.fill = '#b8222f';
                   $(this).find('circle')[0].style.opacity = 0.5;
-
                 })
                 .mouseleave(function() {
-                  // $(this).find('circle')[0].style.fill = '#fff';
                   $(this).find('circle')[0].style.opacity = 0.25;
-
                 });
 
                 // Prevent event duplication issue by unbinding before binding
