@@ -42,13 +42,17 @@ body {
 }
 
 .arrow {
-  position: absolute;
+  position: fixed;
   top: 50%;
   transform: translateY(-50%);
   width: 100px;
   height: 100px;
   display: none;
   z-index: 160;
+}
+
+circle {
+  opacity: 0.25;
 }
 
 #arrow-left{

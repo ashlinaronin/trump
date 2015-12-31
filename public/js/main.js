@@ -1,9 +1,6 @@
 $(document).ready(function() {
     $.mobile.loading().hide();
 
-
-
-
     var lastTimeStamp;
     var numTweetsPrinted = 0;
 
@@ -63,7 +60,7 @@ $(document).ready(function() {
 
                 // Show next tweet in overlay, if it exists
                 var showNext = function() {
-                  var newIndex = $('#hats span').index($(showing)) + 1;
+                  var newIndex = $('#hats span').index(showing) + 1;
 
                   if (data.tweets[newIndex]) {
                     $('#overlay').css('background-image', 'url(' + data.tweets[newIndex].biggerAvatarUrl + ')');
@@ -74,7 +71,7 @@ $(document).ready(function() {
 
                 // Show previous tweet in overlay, if it exists
                 var showPrevious = function() {
-                  var newIndex = $('#hats span').index($(showing)) - 1;
+                  var newIndex = $('#hats span').index(showing) - 1;
 
                   if (data.tweets[newIndex]) {
                     $('#overlay').css('background-image', 'url(' + data.tweets[newIndex].biggerAvatarUrl + ')');
@@ -85,23 +82,29 @@ $(document).ready(function() {
 
                 // Hover effect for arrows
                 $('.arrow').mouseenter(function() {
-                  $(this).find('circle')[0].style.fill = '#b8222f';
+                  // $(this).find('circle')[0].style.fill = '#b8222f';
+                  $(this).find('circle')[0].style.opacity = 0.5;
+
                 })
                 .mouseleave(function() {
-                  $(this).find('circle')[0].style.fill = 'none';
+                  // $(this).find('circle')[0].style.fill = '#fff';
+                  $(this).find('circle')[0].style.opacity = 0.25;
+
                 });
 
-                $('#arrow-left').click(function() {
+                // Prevent event duplication issue by unbinding before binding
+                $('#arrow-left').off('click').on('click', function() {
                   if (showing) { showPrevious() };
                 });
-                $('#arrow-right').click(function() {
+                $('#arrow-right').off('click').on('click', function() {
                   if (showing) { showNext() };
                 });
 
 
 
                 // Left and right arrow keys or swiping to show next and previous tweets
-                $(document).keyup(function(event) {
+                // Prevent event duplication issue by unbinding here too
+                $(document).off('keyup').on('keyup', function(event) {
                   switch(event.which) {
                     case 37: // left
                       if (showing) { showPrevious() }
@@ -145,8 +148,20 @@ $(document).ready(function() {
       $('body').removeClass('clickable');
     }
 
-    // click anywhere to hide the overlay
-    $('.overlay').click(function() {
+    // Click anywhere except the navigation buttons to hide the overlay
+    $('body').click(function(event) {
+      // If an arrow was clicked, don't do anything here
+      if (event.target.class == 'arrow') {
+        return;
+      }
+
+      // If any descendant of an arrow was clicked, also disable the hideOverlay functionality
+      // jQuery closest finds the closest given selector found after traversing up the DOM
+      if ($(event.target).closest('.arrow').length) {
+        return;
+      }
+
+      // If anywhere else was clicked and the overlay is currently showing, hide it
       if (showing) { hideOverlay() }
     });
 
