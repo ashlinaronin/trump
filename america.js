@@ -12,5 +12,9 @@ app.get('/getTrumpCount', function(request, response) {
     response.send(twitterController.getCurrentData());
 });
 
+app.get('/america', function(request, response) {
+    response.send({america:'good'});
+});
+
 app.listen(5000, '127.0.0.1');
 console.log('Server is running at 127.0.0.1:5000');
