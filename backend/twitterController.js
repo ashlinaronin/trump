@@ -11,6 +11,7 @@ var T = new Twit({
 
 var count = 0;
 var tweets = [];
+var maxTweets = 200;
 var timestamp = null;
 
 // Public function to start the stream
@@ -39,6 +40,14 @@ function trumpStream() {
     magaStream.on('tweet', function (tweet) {
         count++;
 
+        // Don't let number of tweets get over max tweets (for now 200)
+        // Reset it so browsers will be able to load new tweets
+        if (count > maxTweets) {
+          tweets = [];
+          count = 1;
+        }
+
+
         /* Remove the '_normal' at the end of the avatar icon url to get
         ** bigger user avatar images that won't be so pixelated.
         ** '_normal' = 7 chars, so slice off the last 7 chars of the basename
@@ -62,6 +71,7 @@ function trumpStream() {
 
         // We got a new tweet, update the timestamp
         timestamp = new Date();
+
     });
 }
 
