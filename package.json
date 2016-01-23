@@ -4,7 +4,7 @@
   "description": "Display Donald Trump's iconic 2016 campaign hat whenever someone tweets with #makeamericagreatagain.",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node america.js"
   },
   "dependencies": {
     "express": "~4.9.x",
