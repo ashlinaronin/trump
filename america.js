@@ -16,5 +16,9 @@ app.get('/america', function(request, response) {
     response.send({america:'good'});
 });
 
+app.get('food', function(request, response) {
+    response.send({hungry:'yes'});
+});
+
 app.listen(5000, '127.0.0.1');
 console.log('Server is running at 127.0.0.1:5000');
