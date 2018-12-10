@@ -2,6 +2,6 @@
   "name": "#makeamericagreatagain",
   "description": "Display Donald Trump's iconic 2016 presidential election campaign hat whenever someone tweets with #makeamericagreatagain.",
   "repository": "https://github.com/ashlinaronin/trump",
-  "logo": "https://cdn.rawgit.com/ashlinaronin/trump/master/public/img/redhat-sq.jpg",
+  "logo": "https://cdn.jsdelivr.net/gh/ashlinaronin/trump@master/public/img/redhat-sq.jpg",
   "keywords": ["trump", "2016", "makeamericagreatagain", "campaign", "slogan", "ashlin", "aronin", "portland", "oregon"]
 }
